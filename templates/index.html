@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AgroGuard AI — Crop Health Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">⌁</span> AgroGuard <b>AI</b></div>
+  <nav>
+    <button class="nav active" data-section="dashboard">Dashboard</button>
+    <button class="nav" data-section="scanner">AI Scanner</button>
+    <button class="nav" data-section="history">Scan History</button>
+    <button class="nav" data-section="risk">Risk Monitor</button>
+  </nav>
+  <div class="user-pill">🌱 Farmer Portal</div>
+</header>
+
+<main class="container">
+  <section id="dashboard" class="section active">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">SCAN → UNDERSTAND → ACT</div>
+        <h1>Crop health intelligence<br><span>built for the field.</span></h1>
+        <p>Upload one clear crop photo and AgroGuard AI turns visual evidence into a disease-risk assessment, symptoms and IPM-first next steps.</p>
+        <button class="primary" id="startScan">📷 Scan a Crop</button>
+      </div>
+      <div class="hero-card">
+        <div class="mini-title">LIVE SYSTEM</div>
+        <div class="system-line"><span class="dot green"></span><span>AI diagnosis engine</span><b id="aiState">Checking…</b></div>
+        <div class="system-line"><span class="dot blue"></span><span>Weather risk</span><b>Open-Meteo</b></div>
+        <div class="system-line"><span class="dot orange"></span><span>Expert escalation</span><b>Enabled</b></div>
+      </div>
+    </div>
+    <div class="cards three">
+      <div class="stat"><span>01</span><h3>Smart Image Diagnosis</h3><p>Multimodal AI reads the uploaded leaf/stem image without a PlantVillage dataset in this prototype.</p></div>
+      <div class="stat"><span>02</span><h3>Weather + Risk</h3><p>Live humidity and rain signals create a transparent outbreak-risk screening score.</p></div>
+      <div class="stat"><span>03</span><h3>Action Plan</h3><p>Low-chemical-first steps, prevention and an expert-review trigger for uncertain cases.</p></div>
+    </div>
+  </section>
+
+  <section id="scanner" class="section">
+    <div class="page-head">
+      <div><div class="eyebrow">AI VISION SCANNER</div><h2>Inspect a crop</h2><p>Use a clear photo of the affected leaf or stem. The AI will explain what it sees and what to do next.</p></div>
+      <div class="badge">🔒 API key stays server-side</div>
+    </div>
+    <div class="scanner-grid">
+      <div>
+        <div class="panel crop-panel">
+          <label>Crop Type</label>
+          <select id="crop">
+            <option>Tomato</option><option>Potato</option><option>Rice</option><option>Wheat</option><option>Maize</option><option>Cotton</option><option>Chilli</option><option>Other</option>
+          </select>
+        </div>
+        <div class="upload" id="dropZone">
+          <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          <div class="upload-icon">↥</div>
+          <h3>Click to Upload or Drag & Drop</h3>
+          <p>JPG, PNG or WEBP · up to 8MB</p>
+          <button class="secondary" id="chooseFile">Choose Image</button>
+          <img id="preview" alt="Selected crop preview" hidden>
+        </div>
+        <button class="primary full" id="analyse">Analyze Crop with AI</button>
+        <div class="notice"><b>Field safety:</b> AI output is decision support, not a confirmed laboratory diagnosis. Low-confidence cases should be verified by an agronomist/KVK expert.</div>
+      </div>
+      <div class="result-panel" id="resultPanel">
+        <div class="result-empty" id="emptyState"><div class="empty-icon">⌁</div><h3>Scan results will appear here</h3><p>Upload an image and start the AI analysis.</p></div>
+        <div id="results" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="section">
+    <div class="page-head"><div><div class="eyebrow">DIGITAL RECORD</div><h2>Previous Scan Reports</h2><p>Your browser keeps the latest scan summaries locally for the demo.</p></div><button class="secondary" id="clearHistory">Clear History</button></div>
+    <div id="historyList" class="history-list"></div>
+  </section>
+
+  <section id="risk" class="section">
+    <div class="page-head"><div><div class="eyebrow">EARLY WARNING</div><h2>Weather Risk Monitor</h2><p>Use your current location or the default Greater Delhi region to screen weather conditions associated with disease pressure.</p></div><button class="primary" id="locate">Use My Location</button></div>
+    <div class="risk-grid">
+      <div class="risk-score"><div class="eyebrow">SCREENING SIGNAL</div><div class="big-score" id="riskScore">--</div><div class="risk-label" id="riskLabel">Loading…</div><p id="riskNote">Fetching live weather.</p></div>
+      <div class="weather-cards" id="weatherCards"></div>
+    </div>
+  </section>
+</main>
+
+<footer>AgroGuard AI · SIH26131-aligned prototype · AI output must be verified before field treatment</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
